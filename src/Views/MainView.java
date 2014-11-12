@@ -1,9 +1,12 @@
 package Views;
 
 import ViewModels.MainViewModel;
+import sun.awt.AWTAccessor;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 
 /**
@@ -21,6 +24,7 @@ public class MainView extends JFrame{
         this.setLayout(new FlowLayout());
         this.setVisible(true);
         this.initLayout();
+        KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(this::keyPressed);
     }
 
     public void setMainViewModel(MainViewModel mainViewModel){
@@ -61,6 +65,25 @@ public class MainView extends JFrame{
 
         if(graphics != null && image != null){
             graphics.drawImage(image, 0, 0, image.getWidth(), image.getHeight(), null);
+        }
+    }
+
+    public boolean keyPressed(KeyEvent e) {
+        switch (e.getKeyChar()){
+            case 'w':
+                this.mainViewModel.forward();
+                return true;
+            case 's':
+                this.mainViewModel.backward();
+                return true;
+            case 'a':
+                // left
+                return true;
+            case 'd':
+                this.mainViewModel.right();
+                return true;
+            default:
+                return false;
         }
     }
 }
