@@ -17,6 +17,7 @@ public class MainViewModel {
 
     public MainViewModel(){
         this.arDrone = new ARDrone();
+        this.arDrone.setSpeed(1);
     }
 
     public void setMainView(MainView mainView){
