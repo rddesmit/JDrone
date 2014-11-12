@@ -1,5 +1,6 @@
 package Controllers;
 
+import ViewModels.MainViewModel;
 import Views.MainView;
 
 /**
@@ -8,8 +9,13 @@ import Views.MainView;
 public class MainController {
 
     private MainView mainView;
+    private MainViewModel mainViewModel;
 
     public MainController(){
         this.mainView = new MainView();
+        this.mainViewModel = new MainViewModel();
+
+        this.mainView.setMainViewModel(this.mainViewModel);
+        this.mainViewModel.setMainView(this.mainView);
     }
 }

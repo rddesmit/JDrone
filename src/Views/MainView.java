@@ -1,5 +1,7 @@
 package Views;
 
+import ViewModels.MainViewModel;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -9,12 +11,17 @@ import java.awt.image.BufferedImage;
  */
 public class MainView extends JFrame{
 
+    private MainViewModel mainViewModel;
     private BufferedImage image;
 
     public MainView() {
         super("JDrone");
         this.setSize(640, 360);
         this.initLayout();
+    }
+
+    public void setMainViewModel(MainViewModel mainViewModel){
+        this.mainViewModel = mainViewModel;
     }
 
     public void setImage(BufferedImage image){
