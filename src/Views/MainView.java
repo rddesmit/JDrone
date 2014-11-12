@@ -17,6 +17,9 @@ public class MainView extends JFrame{
     public MainView() {
         super("JDrone");
         this.setSize(640, 360);
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        this.setLayout(new FlowLayout());
+        this.setVisible(true);
         this.initLayout();
     }
 
@@ -31,16 +34,16 @@ public class MainView extends JFrame{
 
     private void initLayout(){
         JButton startButton = new JButton("start");
-        startButton.addActionListener(e -> System.out.println(e.toString()));
+        startButton.addActionListener(e -> this.mainViewModel.start());
 
         JButton stopButton = new JButton("stop");
-        stopButton.addActionListener(e -> System.out.println(e.toString()));
+        stopButton.addActionListener(e -> this.mainViewModel.stop());
 
         JButton takeoffButton = new JButton("takeoff");
-        takeoffButton.addActionListener(e -> System.out.println(e.toString()));
+        takeoffButton.addActionListener(e -> this.mainViewModel.takeOff());
 
         JButton landButton = new JButton("land");
-        landButton.addActionListener(e -> System.out.println(e.toString()));
+        landButton.addActionListener(e -> this.mainViewModel.land());
 
         JPanel panel = new JPanel();
         panel.add(startButton);
@@ -49,11 +52,14 @@ public class MainView extends JFrame{
         panel.add(landButton);
 
         this.getContentPane().add(panel, BorderLayout.SOUTH);
+        this.repaint();
     }
 
     @Override
     public void paint(Graphics graphics){
-        if(graphics != null){
+        super.paint(graphics);
+
+        if(graphics != null && image != null){
             graphics.drawImage(image, 0, 0, image.getWidth(), image.getHeight(), null);
         }
     }
