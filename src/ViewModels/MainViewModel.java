@@ -43,17 +43,8 @@ public class MainViewModel {
         return true;
     }
 
-    public ARDrone getArDrone(){
-        return this.arDrone;
-    }
-
     public void sendVideo(){
-        this.arDrone.getVideoManager().addImageListener(new ImageListener() {
-            @Override
-            public void imageUpdated(BufferedImage bufferedImage) {
-
-            }
-        });
+        this.arDrone.getVideoManager().addImageListener(this.mainView::setImage);
     }
 
     public void forward(){
@@ -66,6 +57,10 @@ public class MainViewModel {
 
     public void right(){
         this.arDrone.goRight();
+    }
+
+    public void left() {
+        this.arDrone.goLeft();
     }
 
     public void takeOff(){
