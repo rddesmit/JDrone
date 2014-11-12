@@ -1,5 +1,6 @@
 package ViewModels;
 
+import Views.MainView;
 import de.yadrone.base.ARDrone;
 import de.yadrone.base.video.ImageListener;
 import de.yadrone.base.video.VideoManager;
@@ -10,10 +11,16 @@ import java.awt.image.BufferedImage;
  * Created by Thomas on 12/11/2014.
  */
 public class MainViewModel {
+
+    private MainView mainView;
     private ARDrone arDrone;
 
     public MainViewModel(){
         this.arDrone = new ARDrone();
+    }
+
+    public void setMainView(MainView mainView){
+        this.mainView = mainView;
     }
 
     public boolean start(){
@@ -36,17 +43,8 @@ public class MainViewModel {
         return true;
     }
 
-    public ARDrone getArDrone(){
-        return this.arDrone;
-    }
-
     public void sendVideo(){
-        this.arDrone.getVideoManager().addImageListener(new ImageListener() {
-            @Override
-            public void imageUpdated(BufferedImage bufferedImage) {
-
-            }
-        });
+        this.arDrone.getVideoManager().addImageListener(this.mainView::setImage);
     }
 
     public void forward(){
@@ -59,6 +57,10 @@ public class MainViewModel {
 
     public void right(){
         this.arDrone.goRight();
+    }
+
+    public void left() {
+        this.arDrone.goLeft();
     }
 
     public void takeOff(){
